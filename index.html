@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CM2 - Socle Commun Aventures</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div id="sidebar">
+        <div class="expand-hint">➜</div>
+        <div class="sidebar-header">
+           <h3>Menu</h3>
+        </div>
+        
+        <a href="#" data-navigate="accueil" class="sidebar-link active-link">🏠 <span>Accueil</span></a>
+        <a href="#" data-navigate="maths" class="sidebar-link">📐 <span>Mathématiques</span></a>
+        <a href="#" data-navigate="francais" class="sidebar-link">📚 <span>Français</span></a>
+        <a href="#" data-navigate="histoire" class="sidebar-link">📜 <span>Histoire & Géo</span></a>
+        <a href="#" data-navigate="sciences" class="sidebar-link">🔬 <span>Sciences</span></a>
+        
+        <div class="sidebar-separator-line"></div>
+        
+        <a href="#" data-navigate="forum" class="sidebar-link">💬 <span>Forum</span></a>
+        <a href="#" data-navigate="contribution" class="sidebar-link">🤝 <span>Contribuer</span></a>
+        <a href="#" data-navigate="parents" class="sidebar-link">👨‍🏫 <span>Espace Parents</span></a>
+        <a href="#" data-navigate="quiz" class="sidebar-link nav-button">🚀 <span>Quiz !</span></a>
+    </div>
+ 
+    <div id="main-content">
+        <header>
+            <div class="logo">Socle CM2 Aventures</div>
+            <div class="search-container">
+               <input type="text" id="search-input" placeholder="Rechercher (ex: Fraction, Louis XVI...)">
+               <button id="search-button">🔍</button>
+           </div>
+       </header>
+    
+        <main>
+           <section id="accueil" class="page-section active-section">
+               <div class="hero-section">
+                   <h1>Bienvenue, jeune explorateur ! 🌟</h1>
+                   <p class="slogan">Prêt à devenir un champion du CM2 ? Ici, tu apprends à ton rythme.</p>
+               </div>
+                
+               <div id="thematics">
+                   <h2>Tes Matières</h2>
+                   <div class="card-container">
+                       <div class="card" data-navigate="maths">
+                           <h3>Mathématiques</h3>
+                           <p>Nombres, Calculs, Géométrie.</p>
+                       </div>
+                       <div class="card" data-navigate="francais">
+                           <h3>Français</h3>
+                           <p>Grammaire, Conjugaison.</p>
+                       </div>
+                       <div class="card" data-navigate="histoire">
+                           <h3>Histoire & Géo</h3>
+                           <p>De la Révolution à l'Europe.</p>
+                       </div>
+                       <div class="card" data-navigate="sciences">
+                           <h3>Sciences</h3>
+                           <p>Corps humain et Énergie.</p>
+                       </div>
+                   </div>
+               </div>
+ 
+               <div id="defi-du-jour" class="interactive-section">
+                   <div class="defi-header">
+                       <h2>🔥 Le Défi du Jour</h2>
+                       <div class="user-score-display">Ton score : <span id="my-defi-score">--</span> pts</div>
+                   </div>
+                   
+                   <p class="sous-titre-small">Prochaine question dans : <span id="countdown">--:--:--</span></p>
+                   
+                   <div id="defi-content-box">
+                       <h3 id="defi-question-text">Chargement...</h3>
+                   </div>
+                            
+                   <div id="defi-input-zone">
+                       <input type="text" id="defi-user-answer" placeholder="Ta réponse..." required>
+                       <button id="valider-defi-btn" class="challenge-button">Valider</button>
+                   </div>
+                   
+                   <div id="already-played-msg" style="display:none; color: #d9534f; font-weight: bold; margin-top:10px; font-size: 1.1em;">
+                       ⏳ Tu as déjà répondu aujourd'hui. Reviens demain pour une nouvelle question !
+                   </div>
+
+                   <div id="defi-feedback" class="feedback-hidden"></div>
+
+                   <div id="defi-history-zone" style="margin-top: 25px; text-align: left;">
+                        <h4 style="color:#555; border-bottom: 2px solid #eee; padding-bottom: 5px;">📜 Ton historique (Derniers jours)</h4>
+                        <ul id="defi-history-list" class="history-list"></ul>
+                   </div>
+                   
+                   <h3 style="margin-top: 30px; color:#555;">🏆 Classement Live</h3>
+                   <div class="podium-container" id="dynamic-podium"></div>
+                   <ul class="ranking-list" id="dynamic-ranking-list"></ul>
+               </div>
+           </section>
+           
+           <section id="maths" class="page-section hub-page">
+               <h2>📐 Mathématiques</h2>
+               <div class="disclaimer-box">🚧 <strong>Info :</strong> Les chapitres sont ajoutés progressivement.</div>
+               <div class="category-grid">
+                   <div class="category-card" data-navigate="maths-nombres"><h3>Les Nombres</h3><button class="nav-button-small">Ouvrir</button></div>
+                   <div class="category-card" data-navigate="maths-mesures"><h3>Mesures</h3><button class="nav-button-small">Ouvrir</button></div>
+                   <div class="category-card" data-navigate="maths-geometrie"><h3>Géométrie</h3><button class="nav-button-small">Ouvrir</button></div>
+               </div>
+           </section>
+
+           <section id="maths-nombres" class="page-section lecon-exercice-page">
+               <h2>Les Nombres & Calculs</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">📘 L'essentiel à retenir</h3>
+                       <p>Les tables de multiplication sont la base de tout !</p>
+                       <table class="multiplication-table">
+                           <tr><th>x</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr>
+                           <tr><th>2</th><td>4</td><td>6</td><td>8</td><td>10</td><td>12</td><td>14</td><td>16</td><td>18</td></tr>
+                           <tr><th>3</th><td>6</td><td>9</td><td>12</td><td>15</td><td>18</td><td>21</td><td>24</td><td>27</td></tr>
+                           <tr><th>4</th><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td></tr>
+                       </table>
+                       <div class="download-zone">
+                           <h3>📂 Fiches de Révision Soignées</h3>
+                           <ul class="resource-list">
+                               <li><a href="data:text/plain;charset=utf-8,%3D%3D%3D%20FICHE%20DE%20REVISION%20:%20LES%20NOMBRES%20DECIMAUX%20%3D%3D%3D%0A%0A1.%20DEFINITION%0AUn%20nombre%20d%C3%A9cimal%20se%20compose%20de%20deux%20parties%20s%C3%A9par%C3%A9es%20par%20une%20virgule%20:%0A-%20La%20partie%20ENTIERE%20(%C3%A0%20gauche)%0A-%20La%20partie%20DECIMALE%20(%C3%A0%20droite)%0A%0AExemple%20:%2014,25%0A%3E%2014%20est%20l'entier.%0A%3E%2025%20est%20la%20d%C3%A9cimale%20(2%20dixi%C3%A8mes,%205%20centi%C3%A8mes).%0A%0A2.%20COMPARER%0AOn%20regarde%20d'abord%20la%20partie%20enti%C3%A8re.%0ASi%20elle%20est%20identique,%20on%20regarde%20le%20premier%20chiffre%20apr%C3%A8s%20la%20virgule.%0AEx%20:%2012,4%20%3E%2012,38%20(car%204%20%3E%203)." download="Fiche_Decimaux_CM2.txt" class="resource-link">📥 Télécharger : Les Nombres Décimaux (Cours Complet)</a></li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+               
+               <div class="content-mode exercice-mode" id="maths-nombres-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement (2 exos)</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Calcule : 7 x 8 ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">56</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Écris en chiffres : "Douze virgule cinq"</p><button class="show-answer-btn">Réponse</button><p class="solution-text">12,5</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire (1 exo)</h4>
+                   <div class="exercice-container">
+                        <div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Moyen</span><p>Pose cette addition : 14,5 + 2,3</p><button class="show-answer-btn">Réponse</button><p class="solution-text">16,8</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion (2 exos)</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Problème</span><p>J'ai 25 bonbons à partager entre 4 amis. Combien en a chacun et combien en reste-t-il ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">6 bonbons chacun. Il en reste 1.</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Logique</span><p>Quel est le double de 15,5 ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">31</p></div>
+                   </div>
+               </div>
+           </section>
+
+           <section id="maths-mesures" class="page-section lecon-exercice-page">
+               <h2>Grandeurs et Mesures</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">📏 Les Conversions</h3>
+                       <p>km > hm > dam > m > dm > cm > mm</p>
+                       <div class="download-zone">
+                           <ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,TABLEAU%20DE%20CONVERSION..." download="Tableau_Mesures.txt" class="resource-link">📥 Télécharger : Tableau de conversion</a></li></ul>
+                       </div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="maths-mesures-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>1 km = ? m</p><button class="show-answer-btn">Réponse</button><p class="solution-text">1000 m</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>10 mm = ? cm</p><button class="show-answer-btn">Réponse</button><p class="solution-text">1 cm</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Moyen</span><p>Convertis 1,5 km en mètres.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">1500 m</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Calcul</span><p>1m + 50cm = ? cm</p><button class="show-answer-btn">Correction</button><p class="solution-text">150 cm</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Problème</span><p>Un terrain carré fait 10m de côté. Quel est son périmètre ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">40 mètres (10 x 4)</p></div>
+                   </div>
+               </div>
+           </section>
+
+           <section id="maths-geometrie" class="page-section lecon-exercice-page">
+               <h2>Géométrie</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">🔺 Figures et Solides</h3>
+                       <p>Connaitre les propriétés du carré, rectangle, losange et du triangle.</p>
+                       <div class="download-zone">
+                           <ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,FICHE%20GEOMETRIE..." download="Fiche_Geo.txt" class="resource-link">📥 Télécharger : Fiche Figures Planes</a></li></ul>
+                       </div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="maths-geometrie-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Combien d'angles droits a un carré ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">4</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Le triangle équilatéral a-t-il 3 côtés égaux ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Oui</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Moyen</span><p>Combien de faces a un cube ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">6 faces carrées</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Devinette</span><p>Je suis un quadrilatère avec 4 côtés égaux mais sans angle droit.</p><button class="show-answer-btn">Correction</button><p class="solution-text">Le Losange</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Construction</span><p>Quel outil utilise-t-on pour tracer un cercle ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Un compas</p></div>
+                   </div>
+               </div>
+           </section>
+ 
+           <section id="francais" class="page-section hub-page">
+               <h2>📚 Français</h2>
+               <div class="category-grid">
+                   <div class="category-card" data-navigate="francais-conjugaison"><h3>Conjugaison</h3><button class="nav-button-small">Ouvrir</button></div>
+                   <div class="category-card" data-navigate="francais-grammaire"><h3>Grammaire</h3><button class="nav-button-small">Ouvrir</button></div>
+               </div>
+           </section>
+
+           <section id="francais-conjugaison" class="page-section lecon-exercice-page">
+               <h2>Conjugaison : Le Futur</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">⏳ Le Futur Simple</h3>
+                       <p>Terminaisons : -ai, -as, -a, -ons, -ez, -ont.</p>
+                       <div class="download-zone">
+                           <ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%20FUTUR%20SIMPLE..." download="Conjugaison_Futur.txt" class="resource-link">📥 Télécharger : Fiche Futur Simple</a></li></ul>
+                       </div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="francais-conjugaison-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Demain, je (manger) une pomme.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Mangerai</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Tu (chanter) ce soir.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Chanteras</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Moyen</span><p>Nous (finir) nos devoirs.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Finirons</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Verbe irrégulier</span><p>Ils (aller) à la plage.</p><button class="show-answer-btn">Correction</button><p class="solution-text">Iront</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Verbe irrégulier</span><p>Vous (faire) un gâteau.</p><button class="show-answer-btn">Correction</button><p class="solution-text">Ferez</p></div>
+                   </div>
+               </div>
+           </section>
+
+           <section id="francais-grammaire" class="page-section lecon-exercice-page">
+               <h2>Grammaire : Accords</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">✍️ Accord Sujet-Verbe</h3>
+                       <p>Le verbe s'accorde toujours en genre et en nombre avec son sujet.</p>
+                       <div class="download-zone">
+                           <ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%20ACCORDS..." download="Grammaire_Accords.txt" class="resource-link">📥 Télécharger : Fiche Accords</a></li></ul>
+                       </div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="francais-grammaire-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Le chat (jouer).</p><button class="show-answer-btn">Réponse</button><p class="solution-text">joue</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Facile</span><p>Les chats (jouer).</p><button class="show-answer-btn">Réponse</button><p class="solution-text">jouent</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Moyen</span><p>Toi et moi (être) amis.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">sommes (Nous)</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Piège</span><p>La foule de gens (crier).</p><button class="show-answer-btn">Correction</button><p class="solution-text">crie (Sujet = La foule)</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Accord</span><p>Les fleurs que j'ai (couper).</p><button class="show-answer-btn">Correction</button><p class="solution-text">coupées</p></div>
+                   </div>
+               </div>
+           </section>
+ 
+           <section id="histoire" class="page-section hub-page">
+               <h2>📜 Histoire & Géographie</h2>
+               <div class="category-grid">
+                   <div class="category-card" data-navigate="histoire-revolution"><h3>La Révolution</h3><button class="nav-button-small">Accéder</button></div>
+                   <div class="category-card" data-navigate="histoire-napoleon"><h3>Napoléon</h3><button class="nav-button-small">Accéder</button></div>
+                   <div class="category-card" data-navigate="histoire-guerre"><h3>1ère Guerre Mondiale</h3><button class="nav-button-small">Accéder</button></div>
+               </div>
+            </section>
+
+           <section id="histoire-revolution" class="page-section lecon-exercice-page">
+               <h2>La Révolution Française (1789)</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                    <div class="lecon-box styled-box">
+                        <h3 class="box-title">⚔️ 1789 : Le Tournant</h3>
+                        <p>Fin de la monarchie absolue, Prise de la Bastille, Déclaration des Droits de l'Homme.</p>
+                        <div class="download-zone"><ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%20REVOLUTION..." download="Histoire_Revolution.txt" class="resource-link">📥 Télécharger : Résumé Révolution</a></li></ul></div>
+                    </div>
+               </div>
+               <div class="content-mode exercice-mode" id="histoire-revolution-exos">
+                    <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                    <div class="exercice-container">
+                        <div class="exercice-box styled-exo"><span class="exo-badge easy">Date</span><p>Date Prise de la Bastille ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">14 Juillet 1789</p></div>
+                        <div class="exercice-box styled-exo"><span class="exo-badge easy">Roi</span><p>Qui était le roi ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Louis XVI</p></div>
+                    </div>
+                    <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                    <div class="exercice-container"><div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Symbole</span><p>Quel bonnet portaient les révolutionnaires ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Le bonnet phrygien</p></div></div>
+                    <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                    <div class="exercice-container">
+                        <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Texte</span><p>Quel texte important a été écrit en 1789 ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">La Déclaration des Droits de l'Homme et du Citoyen</p></div>
+                        <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Conséquence</span><p>Comment est mort Louis XVI ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Guillotiné</p></div>
+                    </div>
+               </div>
+           </section>
+
+           <section id="histoire-napoleon" class="page-section lecon-exercice-page">
+               <h2>Napoléon Bonaparte</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">👑 Le Premier Empire</h3>
+                       <p>Sacre en 1804. Grandes batailles (Austerlitz). Défaite à Waterloo (1815).</p>
+                       <div class="download-zone"><ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%20NAPOLEON..." download="Histoire_Napoleon.txt" class="resource-link">📥 Télécharger : Fiche Napoléon</a></li></ul></div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="histoire-napoleon-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Date</span><p>Année du sacre ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">1804</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Titre</span><p>Il était Roi ou Empereur ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Empereur</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container"><div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Bataille</span><p>Quelle bataille célèbre a-t-il gagnée en 1805 ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Austerlitz</p></div></div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Fin</span><p>Où a-t-il perdu sa dernière bataille ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Waterloo</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Exil</span><p>Sur quelle île est-il mort ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Sainte-Hélène</p></div>
+                   </div>
+               </div>
+           </section>
+
+           <section id="histoire-guerre" class="page-section lecon-exercice-page">
+               <h2>La Première Guerre Mondiale</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">🎖️ 1914-1918 : La Grande Guerre</h3>
+                       <p>Guerre des tranchées. Les Poilus. Armistice le 11 Novembre 1918.</p>
+                       <div class="download-zone"><ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%201914-1918..." download="Histoire_Guerre_1418.txt" class="resource-link">📥 Télécharger : Résumé 1ère Guerre Mondiale</a></li></ul></div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="histoire-guerre-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Dates</span><p>Début et Fin ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">1914 - 1918</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Surnom</span><p>Surnom des soldats français ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Les Poilus</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container"><div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Vie</span><p>Où vivaient les soldats ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Dans les tranchées</p></div></div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Armistice</span><p>Quel jour précis s'arrête la guerre ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Le 11 Novembre 1918</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Alliance</span><p>Qui était allié avec la France ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Le Royaume-Uni et la Russie (puis les USA)</p></div>
+                   </div>
+               </div>
+           </section>
+ 
+           <section id="sciences" class="page-section hub-page">
+               <h2>🔬 Sciences</h2>
+               <div class="category-grid">
+                   <div class="category-card" data-navigate="sciences-corps"><h3>Le Corps Humain</h3><button class="nav-button-small">Accéder</button></div>
+                   <div class="category-card" data-navigate="sciences-energie"><h3>L'Énergie</h3><button class="nav-button-small">Accéder</button></div>
+               </div>
+           </section>
+           <section id="sciences-corps" class="page-section lecon-exercice-page">
+               <h2>La Digestion</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">🍎 Le trajet des aliments</h3>
+                       <p>Bouche (mastication) > Œsophage > Estomac (broyage) > Intestin Grêle (passage dans le sang) > Gros Intestin.</p>
+                       
+
+[Image of human digestive system diagram]
+
+                       <div class="download-zone"><ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,SCHEMA%20DIGESTION..." download="Sciences_Digestion.txt" class="resource-link">📥 Télécharger : Schéma Digestion</a></li></ul></div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="sciences-corps-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Organe</span><p>Où arrivent les aliments après la bouche ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Dans l'œsophage</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Organe</span><p>Où sont broyés les aliments ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Dans l'estomac</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container"><div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Rôle</span><p>A quoi servent les dents ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">A mastiquer (couper/broyer) les aliments</p></div></div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Important</span><p>Où les nutriments passent-ils dans le sang ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Dans l'intestin grêle</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Déchet</span><p>Que deviennent les aliments non digérés ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Ils sont évacués par le gros intestin (selles)</p></div>
+                   </div>
+               </div>
+            </section>
+           <section id="sciences-energie" class="page-section lecon-exercice-page">
+               <h2>Les Énergies</h2>
+               <div class="switch-button-container">
+                   <button class="switch-btn lecon-btn active-mode" onclick="toggleMode(this, 'lecon')">📚 Leçon & Fiches</button>
+                   <button class="switch-btn exo-btn" onclick="toggleMode(this, 'exercice')">✏️ Exercices</button>
+               </div>
+               <div class="content-mode lecon-mode active-mode">
+                   <div class="lecon-box styled-box">
+                       <h3 class="box-title">⚡ Renouvelables vs Fossiles</h3>
+                       <p><strong>Renouvelables :</strong> Soleil, Vent, Eau, Biomasse.<br><strong>Non-renouvelables (Fossiles) :</strong> Pétrole, Gaz, Charbon, Nucléaire (Uranium).</p>
+                       <div class="download-zone"><ul class="resource-list"><li><a href="data:text/plain;charset=utf-8,LECON%20ENERGIES..." download="Sciences_Energies.txt" class="resource-link">📥 Télécharger : Fiche Énergies</a></li></ul></div>
+                   </div>
+               </div>
+               <div class="content-mode exercice-mode" id="sciences-energie-exos">
+                   <h4 class="level-title">🟢 Niveau 1 : Échauffement</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Classement</span><p>Le soleil est-il renouvelable ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Oui</p></div>
+                       <div class="exercice-box styled-exo"><span class="exo-badge easy">Classement</span><p>Le pétrole est-il renouvelable ?</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Non (Fossile)</p></div>
+                   </div>
+                   <h4 class="level-title" style="color: #fd7e14;">🟠 Niveau 2 : Intermédiaire</h4>
+                   <div class="exercice-container"><div class="exercice-box styled-exo intermediate-mode"><span class="exo-badge medium">Exemple</span><p>Cite une énergie qui pollue beaucoup.</p><button class="show-answer-btn">Réponse</button><p class="solution-text">Le charbon ou le pétrole</p></div></div>
+                   <h4 class="level-title" style="color: #dc3545;">🔴 Niveau 3 : Réflexion</h4>
+                   <div class="exercice-container">
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Définition</span><p>Pourquoi dit-on "Renouvelable" ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">Car elle ne s'épuise pas à l'échelle humaine</p></div>
+                       <div class="exercice-box styled-exo hard-mode"><span class="exo-badge hard">Utilisation</span><p>Comment appelle-t-on l'énergie produite par le vent ?</p><button class="show-answer-btn">Correction</button><p class="solution-text">L'énergie éolienne</p></div>
+                   </div>
+               </div>
+           </section>
+ 
+           <section id="forum" class="page-section">
+               <h2>💬 Le Forum des Élèves</h2>
+               <div class="forum-container" id="forum-posts-container">
+                   <div class="forum-card">
+                       <div class="forum-icon">➗</div>
+                       <div class="forum-content">
+                           <div class="forum-header">
+                                <span class="tag-subject math">Maths</span>
+                                <span class="forum-date">Aujourd'hui 14:30</span>
+                           </div>
+                           <h4>Problème division à 2 chiffres</h4>
+                           <p>Je bloque quand il y a un reste, comment on fait la preuve ?</p>
+                           <div class="replies-container"></div>
+                           <div class="reply-action-area">
+                                <button class="reply-btn-small trigger-reply">↩️ Répondre</button>
+                                <div class="reply-input-box" style="display: none;">
+                                    <textarea placeholder="Ta réponse..."></textarea>
+                                     <button class="nav-button-small send-reply">Envoyer</button>
+                                </div>
+                           </div>
+                           <div class="forum-footer">Par <strong>Léo</strong></div>
+                       </div>
+                   </div>
+                   <div class="forum-card">
+                       <div class="forum-icon">👑</div>
+                       <div class="forum-content">
+                           <div class="forum-header">
+                                <span class="tag-subject history">Histoire</span>
+                                <span class="forum-date">Hier 18:15</span>
+                           </div>
+                           <h4>Louis XIV</h4>
+                           <p>Pourquoi Versailles ?</p>
+                           <div class="replies-container"></div>
+                           <div class="reply-action-area">
+                                <button class="reply-btn-small trigger-reply">↩️ Répondre</button>
+                                <div class="reply-input-box" style="display: none;">
+                                    <textarea placeholder="Ta réponse..."></textarea>
+                                     <button class="nav-button-small send-reply">Envoyer</button>
+                                </div>
+                           </div>
+                           <div class="forum-footer">Par <strong>Sophie</strong></div>
+                       </div>
+                   </div>
+               </div>
+               <button id="create-subject-btn" class="challenge-button big-btn">➕ Créer un nouveau sujet</button>
+           </section>
+ 
+           <section id="contribution" class="page-section">
+                <h2>🤝 Espace Contribution</h2>
+               <div class="contribution-wrapper">
+                   <p class="contrib-intro">Aidez-nous à améliorer le site !</p>
+                   <form id="contribution-form">
+                       <div class="form-group">
+                           <label>Votre Email (pour la réponse) :</label>
+                           <input type="email" id="contributor-email" required placeholder="exemple@email.com">
+                       </div>
+                        <div class="form-group">
+                           <label>Vous êtes :</label>
+                           <select id="contributor-role">
+                                <option value="eleve">🎓 Élève CM2</option>
+                                <option value="prof">🍎 Professeur</option>
+                                <option value="etudiant">📚 Étudiant</option>
+                           </select>
+                       </div>
+                       <div class="form-group">
+                           <label>Type de demande :</label>
+                           <select id="contributor-type">
+                                <option value="correction">🔧 Correction</option>
+                                <option value="question">❓ Question</option>
+                                <option value="amelioration">✨ Amélioration</option>
+                                <option value="ajout">➕ Ajout</option>
+                           </select>
+                       </div>
+                        <div class="form-group">
+                           <label>Matière concernée :</label>
+                           <input type="text" id="contrib-subject-name" placeholder="Ex: Maths, Histoire...">
+                       </div>
+                        <div class="form-group">
+                           <label>Votre Message :</label>
+                           <textarea id="contribution-text" required placeholder="Votre message..."></textarea>
+                       </div>
+                        <button type="submit" class="submit-btn-styled">Envoyer la contribution 🚀</button>
+                   </form>
+               </div>
+           </section>
+           
+           <section id="parents" class="page-section">
+                <h2>👨‍🏫 Espace Parents & Enseignants</h2>
+               <div class="parent-content">
+                    <div class="parent-card highlight" style="background: #e3f2fd; border-left: 5px solid #007bff; margin-bottom: 20px;">
+                        <h3>🌟 Pourquoi ce site ?</h3>
+                        <p>Une plateforme pensée pour la réussite et le partage.</p>
+                        <ul class="parent-list">
+                            <li><strong>Site Collaboratif :</strong> Construit grâce à la collaboration de professeurs et d'élèves de la France entière.</li>
+                            <li><strong>Lieu d'Entraide :</strong> Un forum sécurisé pour poser des questions et s'aider mutuellement.</li>
+                            <li><strong>Bienfaits :</strong> Renforce l'autonomie, rassure sur les acquis et permet de réviser en s'amusant.</li>
+                        </ul>
+                    </div>
+                    
+                   <div class="parent-card">
+                       <h3>🎯 Objectifs du Socle Commun (CM2)</h3>
+                       <ul class="parent-list">
+                           <li><strong>Français :</strong> Lecture fluide, grammaire (accords), conjugaison (temps simples/composés).</li>
+                           <li><strong>Mathématiques :</strong> Nombres décimaux, fractions simples, géométrie, problèmes.</li>
+                           <li><strong>Culture :</strong> Histoire de France, repères géographiques, démarche scientifique.</li>
+                       </ul>
+                   </div>
+                   <div class="parent-card highlight">
+                       <h3>📢 Suivi & Corrigés</h3>
+                       <p>Les résultats des quiz sont stockés sur cette page dans l'onglet "Quiz". <br>Pour les défis du jour, la réponse s'affiche après validation.</p>
+                   </div>
+                   
+                   <div class="parent-card" style="border-top: 4px solid #28a745; margin-top: 20px;">
+                        <h3>📞 Nous Contacter</h3>
+                        <p>Une question pédagogique ou technique ? L'équipe est à votre écoute.</p>
+                        <ul class="parent-list" style="list-style: none; padding-left: 0;">
+                            <li style="margin-bottom:8px;">📧 <strong>Email :</strong> contact@socle-cm2-aventures.fr</li>
+                            <li style="margin-bottom:8px;">📞 <strong>Tel :</strong> 01 23 45 67 89 (Lun-Ven 9h-17h)</li>
+                            <li>📍 <strong>Adresse :</strong> 12 Rue de l'École, 75000 Paris</li>
+                        </ul>
+                    </div>
+                </div>
+           </section>
+ 
+           <section id="quiz" class="page-section">
+               <h2>🚀 QCM Interactif (15 Questions)</h2>
+               
+               <div id="quiz-stats-container" style="display:block; margin-bottom: 20px;">
+                   <h3>📈 Vos Statistiques (Temps Réel)</h3>
+                   <div class="stats-summary">
+                       <div class="stat-box"><span class="stat-value" id="stat-total">0</span><span class="stat-label">Total</span></div>
+                        <div class="stat-box"><span class="stat-value" id="stat-average">--/15</span><span class="stat-label">Moyenne</span></div>
+                       <div class="stat-box"><span class="stat-value" id="stat-best">--</span><span class="stat-label">Meilleur</span></div>
+                   </div>
+                   <div class="stats-bars" id="chart-bars-area"></div>
+               </div>
+               
+               <div id="quiz-container"><p>Chargement...</p></div>
+                <div id="quiz-result" class="notification-hidden">
+                   <p id="score-text"></p>
+                   <p id="feedback-text"></p>
+               </div>
+               <button id="submit-quiz-btn" class="challenge-button">Valider mes réponses</button>
+           </section>
+ 
+        </main>
+    </div>
+ 
+    <footer id="main-footer">
+       <p>&copy; 2025 Socle CM2 Aventures</p>
+    </footer>
+    
+    <div id="notification-popup" class="notification-hidden"></div>
+    <div id="confetti-container"></div>
+    
+    <div id="forum-modal-step1" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+           <h3>Nouveau Sujet : Étape 1</h3>
+            <div class="modal-form-group checkbox-group">
+               <input type="checkbox" id="anon-check">
+               <label for="anon-check">Poster en anonyme</label>
+           </div>
+           <p>Dans quelle matière ?</p>
+            <div class="modal-options">
+               <button class="select-subject-btn" data-sub="Maths" data-class="math">Mathématiques</button>
+               <button class="select-subject-btn" data-sub="Français" data-class="francais">Français</button>
+               <button class="select-subject-btn" data-sub="Histoire" data-class="history">Histoire</button>
+               <button class="select-subject-btn" data-sub="Sciences" data-class="science">Sciences</button>
+           </div>
+            <button class="modal-close-btn" onclick="closeAllModals()">Annuler</button>
+        </div>
+    </div>
+    <div id="forum-modal-step2" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+           <h3>Écrire votre message</h3>
+            <p id="forum-selected-info" style="color: #007bff; font-weight: bold;"></p>
+          <input type="text" id="new-post-title" class="modal-input" placeholder="Titre du sujet...">
+           <textarea id="new-post-body" class="modal-input" rows="4" placeholder="Votre question..."></textarea>
+            <button id="publish-forum-btn" class="challenge-button">Publier sur le forum</button>
+            <button class="modal-close-btn" onclick="closeAllModals()">Annuler</button>
+        </div>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>
